@@ -1,3 +1,4 @@
+#función donde se abre y se lee el csv
 def cargar_datos(nombre_archivo):
     partidos = []
 
@@ -18,7 +19,7 @@ def cargar_datos(nombre_archivo):
     return partidos
 
 
-
+#función para buscar los registros acorde a lo que ingresa el usuario, ignorando mayusculas o minusculas
 def buscar_registros(partidos, termino):
     encontrados = []
     termino = termino.lower().strip()
@@ -37,13 +38,13 @@ def buscar_registros(partidos, termino):
     return encontrados
 
 
-
+#funcion donde se calculan las estadisticas, máximo, minimo, promedio y datos adicionales necesarios para el análisis futbolístico
 def calcular_estadisticas(partidos, campo):
     valores = []
 
     for partido in partidos:
         valor = partido.get(campo, "")
-
+    #se trasforman los datos a float para poder operar con ellos
         try:
             numero = float(valor)
             valores.append(numero)
@@ -71,7 +72,7 @@ def calcular_estadisticas(partidos, campo):
     return mayor, menor, promedio
 
 
-
+#funcion adicional propia, donde se filtran partidos con mayor cantidad de goles a las que introduce el usuario
 def filtrar_por_goles(partidos, minimo):
     encontrados = []
 
@@ -90,7 +91,7 @@ def filtrar_por_goles(partidos, minimo):
     return encontrados
 
 
-
+#funcion que genera el informe con las estadisticas de un equipo introducido por el usuario durante toda la temporada
 def informe_equipo(partidos, equipo_buscado):
     partidos_jugados = 0
     victorias = 0
@@ -144,7 +145,7 @@ def informe_equipo(partidos, equipo_buscado):
     promedio = goles_favor / partidos_jugados
     porcentaje_victorias = victorias / partidos_jugados * 100
     puntos = victorias * 3 + empates
-
+    #retorna todos los datos para ser usados mas adelante
     return {
         "partidos": partidos_jugados,
         "victorias": victorias,
@@ -159,7 +160,7 @@ def informe_equipo(partidos, equipo_buscado):
     }
 
 
-
+#función que compara el rendimiento de dos equipos teniendo en cuenta sus estadísticas
 def comparar_equipos(partidos, equipo1, equipo2):
     informe1 = informe_equipo(partidos, equipo1)
     informe2 = informe_equipo(partidos, equipo2)
@@ -183,7 +184,7 @@ def comparar_equipos(partidos, equipo1, equipo2):
     return comparacion
 
 
-
+#función principal del menú
 def mostrar_menu(partidos):
     while True:
         print("\n" + "-" * 40)
@@ -201,7 +202,7 @@ def mostrar_menu(partidos):
         print("-" * 40)
 
         opcion = input("Elige una opción: ")
-
+        #opcion 1 del menu, registro de partidos de un equipo, la funcion puede buscar equipos por semejanza de caracteres, por ejemplo, si se introduce "Bar", buscará los resultados del barcelona, o en caso de escribir "Ath" buscará los resultados tanto de Ath Bilbao como Ath Madrid
         if opcion == "1":
             termino = input("Equipo que quieres buscar: ")
             resultados = buscar_registros(partidos, termino)
@@ -216,7 +217,7 @@ def mostrar_menu(partidos):
                     partido.get("FTAG", "?"),
                     partido.get("AwayTeam", partido.get("Away Team", "?"))
                 )
-
+        #opcion 2 del menu, estadísticas
         elif opcion == "2":
             campo = input(
                 "Campo numérico (por ejemplo, FTHG, FTAG o HS) (Más opciones en el glosario): "
@@ -231,7 +232,7 @@ def mostrar_menu(partidos):
                 print("Máximo:", mayor)
                 print("Mínimo:", menor)
                 print("Promedio:", round(promedio, 2))
-
+        #opcion 3, aqui si se debe poner el nombre exacto del equipo, listado de equipos en el glosario
         elif opcion == "3":
             equipo = input("Nombre exacto del equipo: ")
             informe = informe_equipo(partidos, equipo)
@@ -255,7 +256,7 @@ def mostrar_menu(partidos):
                     round(informe["porcentaje_victorias"], 2),
                     "%"
                 )
-
+        #opcion 4 del menú, filtro de partidos con mayor cantidad de goles a la introducida
         elif opcion == "4":
             try:
                 minimo = int(input("Mínimo de goles totales: "))
@@ -275,7 +276,7 @@ def mostrar_menu(partidos):
             except ValueError:
                 print("Debes escribir un número entero.")
 
-        
+        #opcion 5, comparador de equipos
         elif opcion == "5":
             equipo1 = input("Primer equipo: ")
             equipo2 = input("Segundo equipo: ")
@@ -317,7 +318,7 @@ def mostrar_menu(partidos):
                       round(comparacion["porcentaje1"], 2), "%")
                 print(comparacion["equipo2"] + ":",
                       round(comparacion["porcentaje2"], 2), "%")
-
+        #opcion 6, cerrar el programa con un break
         elif opcion == "6":
             print("Gracias por usar FOOTLAB.")
             break
@@ -327,7 +328,7 @@ def mostrar_menu(partidos):
             print("Opción no válida. Intenta nuevamente.")
 
 
-
+#pantalla inicial de presentación del programa FOOTLAB, usando .center para centrar el texto
 partidos = cargar_datos("laliga.csv")
 print()
 print("*" * 48)
@@ -346,5 +347,3 @@ print("  Sistema de exploracion y analisis futbolistico")
 print()
 
 mostrar_menu(partidos)
-
-
