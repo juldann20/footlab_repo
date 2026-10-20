@@ -27,6 +27,28 @@ Aplicar los fundamentos de programación en Python para cargar, organizar, consu
 - **FTAG:** goles del equipo visitante.
 - **HS:** remates del equipo local, si este campo está presente en el CSV.
 
+#### Glosario de equipos: nombres exactos de los equipos incluidos para buscarlos, en negrita el nombre exacto de cada equipo dentro del programa
+-**Alaves:** Deportivo Alavés
+-**Ath Bilbao:** Athletic Club de Bilbao
+-**Ath Madrid:** Club Atlético de Madrid
+-**Barcelona:** F.C. Barcelona
+-**Celta:** R.C. Celta de Vigo
+-**Espanol:** R.C.D. Espanyol de Barcelona
+-**Getafe:** Getafe C.F.
+-**Girona:** Girona F.C.
+-**Las Palmas:** U.D. Las Palmas
+-**Leganes:** C.D. Leganés
+-**Mallorca:** R.C.D. Mallorca
+-**Osasuna:** C.A. Osasuna
+-**Vallecano:** Rayo Vallecano
+-**Betis:** Real Betis Balompié
+-**Real Madrid:** Real Madrid C.F.
+-**Sociedad:** Real Sociedad
+-**Valladolid:** Real Valladolid C.F.
+-**Sevilla:** Sevilla F.C.
+-**Valencia:** Valencia C.F.
+-**Villarreal:** Villarreal C.F.
+
 ### Detective
 
 - **Filtro por goles:** encuentra partidos con una cantidad de goles totales igual o superior al mínimo introducido por el usuario.
